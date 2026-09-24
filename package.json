@@ -1,0 +1,13 @@
+{
+  "name": "admission-lead-management",
+  "version": "1.0.0",
+  "description": "Junior Software Engineer assignment - Admission Lead Management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

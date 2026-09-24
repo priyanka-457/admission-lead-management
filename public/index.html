@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admission Lead Management</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Admission Lead Management</h1>
+      <p>Lead lifecycle, counsellor follow-ups, manager visibility & insights</p>
+    </div>
+    <div class="role-box">
+      <label for="role">View as</label>
+      <select id="role">
+        <option value="manager">Manager</option>
+        <option value="counsellor">Counsellor</option>
+      </select>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
+    <button class="tab" data-tab="leads">Lead Management</button>
+    <button class="tab" data-tab="followups">Follow-ups</button>
+    <button class="tab" data-tab="reports">Reports & Insights</button>
+  </nav>
+
+  <main>
+    <section id="dashboard" class="page active">
+      <div class="page-title">
+        <div><h2>Manager Dashboard</h2><p>Monitor admission pipeline and ageing.</p></div>
+        <button class="primary" onclick="openLeadModal()">+ Add New Lead</button>
+      </div>
+      <div id="kpis" class="kpi-grid"></div>
+      <div class="grid-2">
+        <div class="card"><h3>Lead Pipeline</h3><div id="pipeline"></div></div>
+        <div class="card"><h3>Ageing Overview</h3><div id="ageingChart"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-heading"><h3>Overdue Follow-ups</h3><button class="link-btn" onclick="showTab('followups')">View all</button></div>
+        <div id="overdueTable"></div>
+      </div>
+    </section>
+
+    <section id="leads" class="page">
+      <div class="page-title">
+        <div><h2>Lead Management</h2><p>Capture, assign, track and update every admission lead.</p></div>
+        <button class="primary" onclick="openLeadModal()">+ Add Lead</button>
+      </div>
+      <div class="filters card">
+        <input id="search" placeholder="Search name, phone, email..." oninput="loadLeads()" />
+        <select id="filterStatus" onchange="loadLeads()"><option value="">All Statuses</option></select>
+        <select id="filterSource" onchange="loadLeads()"><option value="">All Sources</option></select>
+        <select id="filterCounsellor" onchange="loadLeads()"><option value="">All Counsellors</option></select>
+        <select id="filterCourse" onchange="loadLeads()"><option value="">All Courses</option></select>
+        <select id="filterAgeing" onchange="loadLeads()">
+          <option value="">All Ageing</option><option value="0-2">0-2 days</option>
+          <option value="3-7">3-7 days</option><option value="8-14">8-14 days</option><option value="15+">15+ days</option>
+        </select>
+        <label class="check"><input type="checkbox" id="filterOverdue" onchange="loadLeads()" /> Overdue only</label>
+      </div>
+      <div class="card"><div id="leadTable"></div></div>
+    </section>
+
+    <section id="followups" class="page">
+      <div class="page-title"><div><h2>Follow-up Actions</h2><p>Prioritize upcoming and overdue counselling actions.</p></div></div>
+      <div class="card">
+        <div class="followup-filter">
+          <button class="chip active" onclick="setFollowupFilter('all', this)">All open</button>
+          <button class="chip" onclick="setFollowupFilter('overdue', this)">Overdue</button>
+          <button class="chip" onclick="setFollowupFilter('today', this)">Today</button>
+          <button class="chip" onclick="setFollowupFilter('upcoming', this)">Upcoming</button>
+        </div>
+        <div id="followupTable"></div>
+      </div>
+    </section>
+
+    <section id="reports" class="page">
+      <div class="page-title"><div><h2>Reports & Insights</h2><p>Understand sources, courses, counsellor workload and conversion.</p></div></div>
+      <div id="reportKpis" class="kpi-grid"></div>
+      <div class="grid-2">
+        <div class="card"><h3>By Lead Source</h3><div id="sourceReport"></div></div>
+        <div class="card"><h3>By Course Preference</h3><div id="courseReport"></div></div>
+      </div>
+      <div class="card"><h3>Counsellor Performance</h3><div id="counsellorReport"></div></div>
+      <div class="card"><h3>Actionable Insights</h3><ul id="insights" class="insights"></ul></div>
+    </section>
+  </main>
+
+  <div id="leadModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header"><h2 id="modalTitle">Add Lead</h2><button onclick="closeModal()">×</button></div>
+      <form id="leadForm">
+        <input type="hidden" id="leadId" />
+        <div class="form-grid">
+          <label>Student Name*<input id="name" required /></label>
+          <label>Phone*<input id="phone" required /></label>
+          <label>Email<input id="email" type="email" /></label>
+          <label>Lead Source*<select id="source" required></select></label>
+          <label>Course Preference*<select id="course" required></select></label>
+          <label>Assign Counsellor<select id="assignedTo"></select></label>
+          <label>Status<select id="status"></select></label>
+          <label>Next Follow-up<input id="nextFollowUp" type="datetime-local" /></label>
+          <label class="full">Notes<textarea id="notes" rows="3"></textarea></label>
+        </div>
+        <div id="formError" class="error"></div>
+        <div class="modal-actions"><button type="button" class="secondary" onclick="closeModal()">Cancel</button><button class="primary">Save Lead</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="followupModal" class="modal hidden">
+    <div class="modal-content small">
+      <div class="modal-header"><h2>Record Follow-up</h2><button onclick="closeFollowupModal()">×</button></div>
+      <form id="followupForm">
+        <input type="hidden" id="followupLeadId" />
+        <label>Action
+          <select id="followupAction"><option>Phone Call</option><option>WhatsApp</option><option>Email</option><option>Campus Visit</option><option>Online Counselling</option></select>
+        </label>
+        <label>Next Follow-up Date/Time<input id="followupDate" type="datetime-local" required /></label>
+        <label>Outcome
+          <select id="followupOutcome"><option value="">Pending</option><option>Contacted</option><option>Qualified</option><option>Converted</option><option>Lost</option></select>
+        </label>
+        <label>Notes<textarea id="followupNotes" rows="4" placeholder="What happened during the interaction?"></textarea></label>
+        <div class="modal-actions"><button type="button" class="secondary" onclick="closeFollowupModal()">Cancel</button><button class="primary">Save Follow-up</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
