@@ -4,8 +4,6 @@
 
 This application manages the complete admission-lead lifecycle from first contact to follow-up and conversion.
 
-It explicitly covers every requirement in Assignment 5:
-
 - Lead capture from website, walk-in, phone call, WhatsApp, education fairs, campaigns, referrals, social media and other sources
 - Assignment to counsellors
 - Course preferences
@@ -14,6 +12,14 @@ It explicitly covers every requirement in Assignment 5:
 - Manager visibility
 - Lead ageing
 - Reports and actionable insights
+
+## Screenshots
+<img width="1457" height="715" alt="image" src="https://github.com/user-attachments/assets/16ed70cb-1e9d-4375-b9c9-5a932364307f" />
+<img width="1502" height="722" alt="image" src="https://github.com/user-attachments/assets/7755f1fe-1ed2-4dc7-80fb-5ff347c69b43" />
+<img width="1465" height="685" alt="image" src="https://github.com/user-attachments/assets/3d9c064f-93d5-4060-bd28-4fda526ada8e" /> 
+<img width="1505" height="687" alt="image" src="https://github.com/user-attachments/assets/6093545f-0b4a-4a2d-9217-7b527e990c46" /> 
+<img width="1492" height="707" alt="image" src="https://github.com/user-attachments/assets/85b23f9a-068b-44b5-a029-a1e496d83c72" />
+<img width="1312" height="696" alt="image" src="https://github.com/user-attachments/assets/9df64192-bb8b-4ce8-91a3-ca48b98cb942" />
 
 ## 2. Main features
 
@@ -53,14 +59,6 @@ Every lead automatically displays its age in days and an ageing bucket:
 - 15+ days
 
 Open leads with a past follow-up date are marked overdue.
-
-## Screenshots
-<img width="1457" height="715" alt="image" src="https://github.com/user-attachments/assets/16ed70cb-1e9d-4375-b9c9-5a932364307f" />
-<img width="1502" height="722" alt="image" src="https://github.com/user-attachments/assets/7755f1fe-1ed2-4dc7-80fb-5ff347c69b43" />
-<img width="1465" height="685" alt="image" src="https://github.com/user-attachments/assets/3d9c064f-93d5-4060-bd28-4fda526ada8e" /> 
-<img width="1505" height="687" alt="image" src="https://github.com/user-attachments/assets/6093545f-0b4a-4a2d-9217-7b527e990c46" /> 
-<img width="1492" height="707" alt="image" src="https://github.com/user-attachments/assets/85b23f9a-068b-44b5-a029-a1e496d83c72" />
-<img width="1312" height="696" alt="image" src="https://github.com/user-attachments/assets/9df64192-bb8b-4ce8-91a3-ca48b98cb942" />
 
 ### Manager dashboard
 The dashboard shows:
@@ -142,7 +140,7 @@ The first run automatically creates `data/leads.json` with sample admission lead
 ```text
 admission-lead-management/
 ├── data/
-│   └── leads.json              # created automatically on first run
+│   └── leads.json              
 ├── public/
 │   ├── index.html
 │   ├── styles.css
@@ -151,7 +149,3 @@ admission-lead-management/
 ├── server.js
 └── README.md
 ```
-
-## 8. Important note for submission
-
-This is a self-contained working project intended for a junior software engineer assignment. Before submission, change the demo counsellor names and sample data if the assignment expects institution-specific data.
