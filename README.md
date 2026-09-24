@@ -54,6 +54,14 @@ Every lead automatically displays its age in days and an ageing bucket:
 
 Open leads with a past follow-up date are marked overdue.
 
+## Screenshots
+<img width="1457" height="715" alt="image" src="https://github.com/user-attachments/assets/16ed70cb-1e9d-4375-b9c9-5a932364307f" />
+<img width="1502" height="722" alt="image" src="https://github.com/user-attachments/assets/7755f1fe-1ed2-4dc7-80fb-5ff347c69b43" />
+<img width="1465" height="685" alt="image" src="https://github.com/user-attachments/assets/3d9c064f-93d5-4060-bd28-4fda526ada8e" /> 
+<img width="1505" height="687" alt="image" src="https://github.com/user-attachments/assets/6093545f-0b4a-4a2d-9217-7b527e990c46" /> 
+<img width="1492" height="707" alt="image" src="https://github.com/user-attachments/assets/85b23f9a-068b-44b5-a029-a1e496d83c72" />
+<img width="1312" height="696" alt="image" src="https://github.com/user-attachments/assets/9df64192-bb8b-4ce8-91a3-ca48b98cb942" />
+
 ### Manager dashboard
 The dashboard shows:
 - Total leads
